@@ -10,7 +10,7 @@ namespace spokie.Controllers
     [Route("api/[controller]")]
     public class CustomersController : Controller
     {
-        [HttpGet, Authorize]
+        [HttpGet, Authorize(Roles = "Manager")]
         public IEnumerable<string> Get()
         {
             return new string[] { "Spokie Himself", "Baka Boi" };
