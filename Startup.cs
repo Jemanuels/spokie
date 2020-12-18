@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using spokie.Extensions;
 
 namespace spokie
 {
@@ -26,6 +27,10 @@ namespace spokie
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.ConfigureJwt();
+
+            services.ConfigureCors();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -47,6 +52,10 @@ namespace spokie
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("EnableCORS");
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
