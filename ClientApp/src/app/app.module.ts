@@ -9,7 +9,11 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { CustomersComponent } from './customers/customers.component';
 import { AppComponent } from './app.component';
+import { JwtModule } from '@auth0/angular-jwt';
 
+export function tokenGetter() {
+  return localStorage.getItem("jwt");
+}
 
 
 @NgModule({
@@ -26,9 +30,15 @@ import { AppComponent } from './app.component';
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
       { path: 'login', component: LoginComponent },
-      { path: 'customers', component: CustomersComponent },
-    ])
-  ],
+      { path: 'customers', component: CustomersComponent, canActivate: [AuthGuard] },
+    ]),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ["localhost:5000"],
+        disallowedRoutes: []
+      }
+    })],
   providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
