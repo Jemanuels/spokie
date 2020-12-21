@@ -20,7 +20,11 @@ export class LoginComponent {
       })
     }).subscribe(response => {
       const token = (<any>response).token;
+      const refreshToken = (<any>response).refreshToken;
+
       localStorage.setItem("jwt", token);
+      localStorage.setItem("refreshToken", refreshToken);
+
       this.invalidLogin = false;
       this.router.navigate(["/"]);
     }, err => {

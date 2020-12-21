@@ -26,7 +26,7 @@ namespace spokie.Extensions
                         ValidateAudience = true,
                         ValidateLifetime = true,
                         ValidateIssuerSigningKey = true,
-
+                        ClockSkew = TimeSpan.Zero,
                         ValidIssuer = "http://localhost:5000",
                         ValidAudience = "http://localhost:5000",
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecret!2020"))
@@ -44,5 +44,7 @@ namespace spokie.Extensions
                 });
             });
         }
+
+        
     }
 }
